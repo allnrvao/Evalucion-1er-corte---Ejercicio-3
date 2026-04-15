@@ -40,26 +40,66 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-@Composable
-fun PedidoForm(onRegister: (String, String, String) -> Unit) {
-    var nombre by remember { mutableStateOf("") }
-    var producto by remember { mutableStateOf("") }
-    var cantidad by remember { mutableStateOf("") }
 
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedTextField(value = nombre, onValueChange = { nombre = it }, label = { Text("Cliente") })
-            OutlinedTextField(value = producto, onValueChange = { producto = it }, label = { Text("Producto") })
-            OutlinedTextField(
-                value = cantidad,
-                onValueChange = { cantidad = it },
-                label = { Text("Cantidad") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-            )
-            Button(onClick = { onRegister(nombre, producto, cantidad) }, modifier = Modifier.fillMaxWidth()) {
-                Text("Registrar Pedido")
+    // Configuración del Tema y Estructura Base
+    @Composable
+    fun PulperiaAppTheme(content: @Composable () -> Unit) {
+        val colorScheme = lightColorScheme(
+            primary = Color(0xFF006494),
+            primaryContainer = Color(0xFFCBE6FF),
+            secondary = Color(0xFF50606E)
+        )
+        MaterialTheme(colorScheme = colorScheme, content = content)
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MainScaffold(content: @Composable (PaddingValues) -> Unit) {
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = { Text("Pedido de Pulpería", fontWeight = FontWeight.Bold) },
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    )
+                )
+            },
+            content = content
+        )
+    }
+
+    @Composable
+    fun PedidoForm(onRegister: (String, String, String) -> Unit) {
+        var nombre by remember { mutableStateOf("") }
+        var producto by remember { mutableStateOf("") }
+        var cantidad by remember { mutableStateOf("") }
+
+        Card(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    label = { Text("Cliente") })
+                OutlinedTextField(
+                    value = producto,
+                    onValueChange = { producto = it },
+                    label = { Text("Producto") })
+                OutlinedTextField(
+                    value = cantidad,
+                    onValueChange = { cantidad = it },
+                    label = { Text("Cantidad") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+                Button(
+                    onClick = { onRegister(nombre, producto, cantidad) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Registrar Pedido")
+                }
             }
         }
     }
