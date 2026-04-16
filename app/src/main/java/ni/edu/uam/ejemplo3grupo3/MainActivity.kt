@@ -73,16 +73,16 @@ fun MainScaffold(content: @Composable (PaddingValues) -> Unit) {
 @Composable
 fun PedidoForm(
     onRegister: (String, String, String) -> Unit,
-    limpiarCampos: Boolean
+    limpiarCamposTrigger: Int
 ) {
 
     var nombre by remember { mutableStateOf("") }
     var producto by remember { mutableStateOf("") }
     var cantidad by remember { mutableStateOf("") }
 
-    // 🔥 Limpiar automáticamente
-    LaunchedEffect(limpiarCampos) {
-        if (limpiarCampos) {
+
+    LaunchedEffect(limpiarCamposTrigger) {
+        if (limpiarCamposTrigger > 0) {
             nombre = ""
             producto = ""
             cantidad = ""
@@ -163,7 +163,7 @@ fun ScreenFinal() {
     var listaPedidos by remember { mutableStateOf(listOf<Pedido>()) }
     var mensajeError by remember { mutableStateOf("") }
     var mostrarExito by remember { mutableStateOf(false) }
-    var limpiarCampos by remember { mutableStateOf(false) }
+    var limpiarCamposTrigger by remember { mutableStateOf(0) }
 
     // 🔥 Ocultar mensaje después de 3 segundos
     LaunchedEffect(mostrarExito) {
@@ -213,15 +213,12 @@ fun ScreenFinal() {
                                 listaPedidos = listaPedidos + Pedido(n, p, cantidadValida)
 
                                 // 🔥 Limpiar campos
-                                limpiarCampos = true
+                                limpiarCamposTrigger++
                             }
                         }
                     },
-                    limpiarCampos = limpiarCampos
+                    limpiarCamposTrigger = limpiarCamposTrigger
                 )
-
-
-                limpiarCampos = false
 
 
                 if (mensajeError.isNotEmpty()) {
