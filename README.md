@@ -29,10 +29,10 @@ La reactividad de la app se basa en las mejores prácticas de Compose:
 
 ### 4. Trabajo Colaborativo y Control de Versiones (5 pts)
 El código fue estructurado en **4 partes lógicas** para permitir que el equipo trabajara simultáneamente sin conflictos de archivos:
-1.  **Parte 1:** Definición de Temas y Estilos (Brand Identity).
-2.  **Parte 2:** Lógica del Formulario y Captura (Input logic).
-3.  **Parte 4:** Componentes de Visualización (Output logic).
-4.  **Parte 4:** Orquestación Final y Scaffold (Main integration).
+1.  **Guillermo** Definición de Temas y Estilos (Brand Identity).
+2.  **Allan** Lógica del Formulario y Captura (Input logic).
+3.  **Álvaro** Componentes de Visualización (Output logic).
+4.  **Fernando** Orquestación Final y Scaffold (Main integration).
 
 ### 5. Organización Final del Proyecto (5 pts)
 El proyecto se entrega en un solo archivo consolidado, pero estrictamente modularizado mediante funciones `@Composable` independientes, lo que facilita el mantenimiento y la escalabilidad futura.
